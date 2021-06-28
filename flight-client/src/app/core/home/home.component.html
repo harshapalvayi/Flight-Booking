@@ -1,0 +1,10 @@
+<div class="layout">
+  <section class="section1 text-center">
+    <div class="mb-4" *ngIf="this.userService.isUserLoggedIn()">
+      <h3>Welcome {{user.username}}</h3>
+    </div>
+    <div>
+      <h1>It's Time to Book A Flight</h1>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,32 @@
+
+<div class="loginBoxStyles">
+  <form class="text-center" [formGroup]= "signInForm" (ngSubmit)="onSubmit()">
+    <header class="text-dark py-5">
+      <h3>Welcome to Book A Flight</h3>
+    </header>
+    <div class="p-formgroup-inline">
+      <div class="p-field">
+        <span class="p-float-label">
+          <input id="user-name" formControlName="username" maxlength="12"
+                 type="text" size="25" pInputText>
+          <label for="user-name">Username</label>
+        </span>
+      </div>
+      <div class="p-field">
+        <span class="p-float-label">
+          <input id="password" formControlName="password"
+                 type="password" size="25" pInputText>
+          <label for="password">Password</label>
+        </span>
+      </div>
+      <button pButton label="SIGN IN"
+              class="p-button-rounded p-button-success"
+              [disabled]="signInForm.invalid"></button>
+    </div>
+  </form>
+</div>
+
+<app-user-errors></app-user-errors>
+
+
+

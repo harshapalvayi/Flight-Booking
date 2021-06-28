@@ -1,0 +1,76 @@
+
+<div class="registerBoxStyles">
+  <form class="text-center" [formGroup]= "signupForm" (ngSubmit)="onSubmit()">
+    <header class="text-dark py-3">
+      <h3>Welcome to Book A Flight</h3>
+    </header>
+    <div class="p-formgroup">
+      <div class="p-field">
+          <span class="p-float-label">
+            <input id="first-name" formControlName="firstname" maxlength="12"
+                   type="text" size="40" pInputText>
+            <label for="first-name">First name</label>
+          </span>
+      </div>
+      <div class="p-field">
+          <span class="p-float-label">
+            <input id="last-name" formControlName="lastname" maxlength="12"
+                   type="text" size="40" pInputText>
+            <label for="last-name">Last name</label>
+          </span>
+      </div>
+      <div class="p-field">
+          <span class="p-float-label">
+            <input id="user-name" formControlName="username" maxlength="12"
+                   type="text" size="40" pInputText>
+            <label for="user-name">User name</label>
+          </span>
+      </div>
+
+      <div class="p-field">
+          <span class="p-float-label">
+            <input id="email" formControlName="email"
+                   type="text" size="40" pInputText>
+            <label for="email">Email</label>
+          </span>
+      </div>
+
+      <div class="p-field">
+          <span class="p-float-label">
+             <input id="password" formControlName="password"
+                    type="text" size="40" pInputText>
+            <label for="password">Password</label>
+          </span>
+      </div>
+
+      <button pButton label="SIGN UP" class="p-button-rounded p-button-success"
+              [disabled]="signupForm.invalid"></button>
+    </div>
+    <div class="my-2" *ngIf="signupForm.get('password').value &&
+                             signupForm.get('password').errors &&
+                             !signupForm.get('password').pristine">
+      <div>
+        <u><b>Passcode Requirements</b></u>
+        <ul>
+          <li class="text-danger"
+              *ngIf="signupForm.get('password').errors['limit']">
+            Must contain at least 7 characters</li>
+          <li class="text-danger"
+              *ngIf="signupForm.get('password').errors['number']">
+            Must contain at  least one number</li>
+          <li class="text-danger"
+              *ngIf="signupForm.get('password').errors['special']">
+            Must contain at least one special characters</li>
+          <li class="text-danger"
+              *ngIf="signupForm.get('password').errors['capital']">
+            Must contain at least one uppercase characters</li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="py-3 w-100" *ngIf="signupForm.valid && errorMessage">
+  <app-message  [severity]="'error'" [text]="errorMessage"></app-message>
+</div>
+
