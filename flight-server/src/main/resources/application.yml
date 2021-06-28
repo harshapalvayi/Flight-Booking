@@ -1,0 +1,18 @@
+spring:
+  devtools:
+      add-properties: false
+  datasource:
+    url:  "jdbc:postgresql://${db-host}:5432/flights"
+    username: ${db-user}
+    password: ${db-pw}
+    #driverClassName: com.mysql.jdbc.Driver
+    #url: "jdbc:mysql://localhost:3306/flights"
+    #username: ${db-user}
+    #password:  ${db-pw}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+jwt:
+  header: Authorization
+  secret: secret-key

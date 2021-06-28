@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md py-2" id="main-nav">
+  <div class="container">
+    <div>
+      <a routerLink="/" class="navbar-brand logo-color" style="cursor: pointer">Book A Flight</a>
+    </div>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn &&  user.accountType.valueOf() === 0">
+        <li class="nav-item"><a routerLink="/app-book-flight" class="nav-link" routerLinkActive="active">Book Flight</a></li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn &&  user.accountType.valueOf() === 1">
+        <li class="nav-item"><a routerLink="/app-manage-airlines" class="nav-link" routerLinkActive="active">Manage Airlines</a></li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto justify-content-end"  *ngIf="!isLoggedIn">
+        <li><a routerLink="/app-sign-up" class="nav-link">Sign Up</a></li>
+        <li><a routerLink="/app-sign-in" class="nav-link">Sign In</a></li>
+      </ul>
+      <ul class="navbar-nav ml-auto justify-content-end"  *ngIf="isLoggedIn && user && user.username">
+        <li><a class="nav-link">{{user.username}}</a></li>
+        <li><a routerLink="/app-sign-out" class="nav-link">Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
