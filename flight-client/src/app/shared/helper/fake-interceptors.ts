@@ -14,8 +14,6 @@ const users: User[] = [
     userid: 1,
     username: 'user',
     password: 'user@123',
-    firstname: 'user',
-    lastname: 'user',
     email: 'User@gmail.com',
     accountType: AccountType.USER
   },
@@ -23,8 +21,6 @@ const users: User[] = [
     userid: 2,
     username: 'admin',
     password: 'admin@123',
-    firstname: 'admin',
-    lastname: 'admin',
     email: 'Admin@gmail.com',
     accountType: AccountType.ADMIN
   }
@@ -39,16 +35,16 @@ const flights: Flights[] = [
     airlineName: Airlines.AIR_INDIA,
     fromLocation: Airports.DEL,
     toLocation: Airports.HYD,
-    deptTime: today,
-    arvlTime:  tomorrow
+    deptDate: today,
+    returnDate:  tomorrow
   },
   { flightId: 2353,
     airlineId: 'AA23',
     airlineName: Airlines.AMERICAN_AIRLINES,
     fromLocation: Airports.CVG,
     toLocation: Airports.HYD,
-    deptTime: today,
-    arvlTime:  tomorrow
+    deptDate: today,
+    returnDate:  tomorrow
   }
 ];
 

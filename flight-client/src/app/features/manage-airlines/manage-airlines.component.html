@@ -1,7 +1,7 @@
 
 <div class="container boxLayout">
   <app-cards class="my-2 bg-light">
-    <form [formGroup]="addFlight" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addFlightForm" (ngSubmit)="onSubmit()">
       <div class="d-flex flex-row align-items-center flex-wrap justify-content-around">
         <div>
           <label><b>AirLine Id</b>
@@ -58,22 +58,15 @@
                         placeholder="returning date"
                         [appendTo]="'body'"
                         [showIcon]="true"
-                        formControlName="arvlDate">
+                        formControlName="returnDate">
             </p-calendar>
-          </label>
-        </div>
-
-        <div>
-          <label><b>Duration</b>
-            <input class="font-weight-bold ml-4"
-                   formControlName="duration" type="number" [min]="1">
           </label>
         </div>
 
         <div>
           <label><b>Seats</b>
             <input class="font-weight-bold ml-4"
-                   formControlName="seats" type="number" [min]="1">
+                   formControlName="seats" type="number" [min]="1" [max]="100">
           </label>
         </div>
 
@@ -83,7 +76,7 @@
 
         <button pButton type="button" label="Add Airlines"
                 class="ml-2 p-button-rounded p-button-success"
-                (click)="onSubmit()" [disabled]="addFlight.invalid" >
+                (click)="onSubmit()" [disabled]="addFlightForm.invalid" >
         </button>
 
       </div>

@@ -7,20 +7,6 @@
     <div class="p-formgroup">
       <div class="p-field">
           <span class="p-float-label">
-            <input id="first-name" formControlName="firstname" maxlength="12"
-                   type="text" size="40" pInputText>
-            <label for="first-name">First name</label>
-          </span>
-      </div>
-      <div class="p-field">
-          <span class="p-float-label">
-            <input id="last-name" formControlName="lastname" maxlength="12"
-                   type="text" size="40" pInputText>
-            <label for="last-name">Last name</label>
-          </span>
-      </div>
-      <div class="p-field">
-          <span class="p-float-label">
             <input id="user-name" formControlName="username" maxlength="12"
                    type="text" size="40" pInputText>
             <label for="user-name">User name</label>
@@ -70,7 +56,6 @@
   </form>
 </div>
 
-<div class="py-3 w-100" *ngIf="signupForm.valid && errorMessage">
-  <app-message  [severity]="'error'" [text]="errorMessage"></app-message>
-</div>
+<app-user-errors></app-user-errors>
+
 

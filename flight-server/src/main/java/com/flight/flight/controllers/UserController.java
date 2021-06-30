@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
-@CrossOrigin(origins="http://localhost:4500")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 public class UserController {
 
@@ -36,11 +36,10 @@ public class UserController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         Date expire;
         String jwt = null;
-        final Users userDetails = authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-        if (userDetails.getUsername() != null) {
-            expire = jwtTokenUtil.extractExpiration(jwt);
-            jwt = jwtTokenUtil.generateToken(userDetails);
+        Users user =  authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        if (user.getUsername() != null) {
+            jwt = this.jwtTokenUtil.generateToken(user);
+            expire = this.jwtTokenUtil.extractExpiration(jwt);
         } else {
             return ResponseEntity
                     .badRequest()
@@ -52,44 +51,36 @@ public class UserController {
                     .body(new MessageResponse("Jwt Token is not valid"));
         }
         return ResponseEntity.ok(new AuthenticationResponse(
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getFirstName(),
-                userDetails.getLastName(),
-                userDetails.getEmail(),
+                user.getId(),
+                user.getAccountType(),
+                user.getUsername(),
+                user.getEmail(),
                 jwt,
                 expire));
     }
 
     @PostMapping(value = "/register")
     public ResponseEntity<?> registerUser(@RequestBody Signup user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
+        if (this.userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("USER_NAME_EXISTS"));
         }
-        if (userRepository.existsByEmail(user.getEmail())) {
+        if (this.userRepository.existsByEmail(user.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("EMAIL_EXISTS"));
         }
 
         int userType = 0;
-        Users newUser = new Users(
-                user.getUsername(),
-                user.getFirstname(),
-                user.getLastname(),
-                user.getPassword(),
-                userType,
-                user.getEmail());
-        userService.save(newUser);
-        final String jwt = jwtTokenUtil.generateToken(newUser);
-        final Date expire = jwtTokenUtil.extractExpiration(jwt);
+        Users newUser = new Users(user.getUsername(), user.getPassword(), user.getEmail(), userType);
+        this.userService.save(newUser);
+        final String jwt = this.jwtTokenUtil.generateToken(newUser);
+        final Date expire = this.jwtTokenUtil.extractExpiration(jwt);
         return ResponseEntity.ok(new AuthenticationResponse(
                 newUser.getId(),
-                newUser.getUsername(),
-                newUser.getFirstName(),
-                newUser.getLastName(),
+                newUser.getAccountType(),
+                user.getUsername(),
                 newUser.getEmail(),
                 jwt,
                 expire));
@@ -97,13 +88,14 @@ public class UserController {
 
     private Users authenticate(String username, String password) throws Exception {
         try {
-            UserDetails userDetails = userService.loadUserByUsername(username);
-            if(password.equals(userDetails.getPassword())) {
-                UsernamePasswordAuthenticationToken authentication  = new UsernamePasswordAuthenticationToken(username, password);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                return (Users) userDetails;
+            UserDetails userDetails = this.userService.loadUserByUsername(username);
+            UsernamePasswordAuthenticationToken authentication  = new UsernamePasswordAuthenticationToken(username, password);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String credentials = authentication.getCredentials().toString();
+            if(password.equals(credentials)) {
+               return (Users) userDetails;
             } else {
-                return new Users();
+                return  new Users();
             }
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);

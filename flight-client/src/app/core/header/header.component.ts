@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {SessionService} from '@shared/services/session/session.service';
-import {User} from '@models/User';
+import * as fromApp from '@shared/root-store/app.reducer';
+import {UserToken} from '@models/User';
+import {getUserState, isUserLogged} from '@shared/root-store/user-store/user.selector';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
@@ -9,16 +11,11 @@ import {User} from '@models/User';
 })
 export class HeaderComponent {
 
-  user: User;
-  isLoggedIn = false;
-  constructor(private sessionService: SessionService) {
-    this.sessionService.userInfo.subscribe(user => {
-      if (user) {
-        this.user = user;
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
-    });
+  user: UserToken;
+  isLoggedIn: boolean;
+  
+  constructor(private store: Store<fromApp.AppState>) {
+    this.store.select(getUserState).subscribe(user => this.user = user);
+    this.store.select(isUserLogged).subscribe(loggedIn => this.isLoggedIn = loggedIn);
   }
 }

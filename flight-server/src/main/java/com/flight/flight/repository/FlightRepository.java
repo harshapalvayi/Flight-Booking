@@ -2,6 +2,7 @@ package com.flight.flight.repository;
 
 import com.flight.flight.entities.Flight;
 import com.flight.flight.entities.Users;
+import com.flight.flight.models.Locations;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +14,7 @@ import java.util.List;
 public interface FlightRepository extends CrudRepository<Flight, Integer> {
 
     List<Flight> findAllBy();
+
+    List<Flight> findAllByFromLocationAndToLocation(Locations fromLocation, Locations toLocation);
 
 }

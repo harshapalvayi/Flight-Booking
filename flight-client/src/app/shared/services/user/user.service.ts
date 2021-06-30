@@ -12,9 +12,7 @@ export class UserService {
   private signInForm: FormGroup | undefined;
   private signUpForm: FormGroup | undefined;
 
-  constructor(private fb: FormBuilder,
-              private http: HttpClient,
-              private sessionService: SessionService) { }
+  constructor(private fb: FormBuilder) { }
 
   createSignInForm(): FormGroup {
     this.signInForm =  this.fb.group({
@@ -26,8 +24,6 @@ export class UserService {
 
   createSignUpForm(): FormGroup {
     this.signUpForm = this.fb.group({
-      firstname: [null, [Validators.required, Validators.minLength(4)]],
-      lastname: [null, [Validators.required, Validators.minLength(4)]],
       username: [null, [Validators.required, Validators.minLength(4)]],
       password: [null, [Validators.required, this.validatePasscode]],
       email: [null, [Validators.required, Validators.email]],
@@ -36,7 +32,6 @@ export class UserService {
   }
 
   signOut(): void {
-    this.sessionService.setUserProfile(null);
     window.sessionStorage.clear();
     window.localStorage.clear();
   }

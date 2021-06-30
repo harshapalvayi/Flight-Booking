@@ -29,15 +29,5 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public void save(Users user) {
-        userRepository.save(user);
-    }
-
-    public String refresh(String username) {
-        String token = null;
-        if (username != null) {
-            token =  jwtTokenUtil.refreshToken(username);
-        }
-        return token;
-    }
+    public void save(Users user) { userRepository.save(user); }
 }

@@ -10,8 +10,7 @@ public class AuthenticationRequest implements Serializable {
     @NotBlank
     private String password;
 
-    public AuthenticationRequest() {
-    }
+    public AuthenticationRequest() { }
 
     public AuthenticationRequest(@NotBlank String username, @NotBlank String password) {
         this.username = username;
