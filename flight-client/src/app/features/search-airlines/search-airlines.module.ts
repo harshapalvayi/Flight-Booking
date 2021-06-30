@@ -1,14 +1,14 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {PrimengModule} from '@shared/primeng.module';
-import { SearchFlightRoutingModule } from './search-flight-routing.module';
-import {SearchFlightComponent} from './search-flight.component';
+import { SearchAirlinesRoutingModule } from './search-airlines-routing.module';
+import {SearchAirlinesComponent} from './search-airlines.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TemplateModule} from '@shared/templates/template.module';
 
 @NgModule({
   declarations: [
-    SearchFlightComponent
+    SearchAirlinesComponent
   ],
     imports: [
         FormsModule,
@@ -16,11 +16,11 @@ import {TemplateModule} from '@shared/templates/template.module';
         PrimengModule,
         TemplateModule,
         ReactiveFormsModule,
-        SearchFlightRoutingModule
+        SearchAirlinesRoutingModule
     ],
   exports: [
-    SearchFlightComponent
+    SearchAirlinesComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class SearchFlightModule { }
+export class SearchAirlinesModule { }

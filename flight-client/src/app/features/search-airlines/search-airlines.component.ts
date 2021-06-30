@@ -1,8 +1,7 @@
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SelectItem} from 'primeng/api';
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FlightHeaders, Flights} from '@models/Flights';
-import {AirportList as airports} from '@models/Airlines';
 import {FlightService} from '@shared/services/flight/flight.service';
 import {Actions, ofType} from '@ngrx/effects';
 import {select, Store} from '@ngrx/store';
@@ -14,11 +13,11 @@ import {UserErrorsComponent} from '@shared/templates/user-errors/user-errors.com
 
 
 @Component({
-  selector: 'app-search-flight',
-  templateUrl: './search-flight.component.html',
-  styleUrls: ['./search-flight.component.sass']
+  selector: 'app-search-airlines',
+  templateUrl: './search-airlines.component.html',
+  styleUrls: ['./search-airlines.component.sass']
 })
-export class SearchFlightComponent {
+export class SearchAirlinesComponent implements OnInit {
 
   public cols: any[];
   flights: Flights[];
@@ -32,13 +31,21 @@ export class SearchFlightComponent {
               private actions$: Actions,
               private flightService: FlightService,
               private store: Store<fromApp.AppState>) {
-    this.locations = airports;
     const { flights } = FlightHeaders;
     this.cols = flights;
     this.store.pipe(select(getFlightState)).subscribe(flights => this.flights = flights);
     this.errorMessage$ = new BehaviorSubject<string>('');
     actions$.pipe(ofType(fromFlightActions.LOAD_FLIGHTS_FAIL))
         .subscribe( error => this.error.showDialog(error));
+  }
+
+  ngOnInit() {
+    this.locations = [];
+    this.flightService.getLocations().subscribe(items => {
+      items.forEach(item => {
+        this.locations.push(this.flightService.calculateLabel(item.locations))
+      })
+    });
   }
 
   onSubmit() {

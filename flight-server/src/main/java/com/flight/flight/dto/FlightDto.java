@@ -21,7 +21,7 @@ public class FlightDto {
 
     private Date returnDate;
 
-    private int seats;
+    private Integer seats;
 
 
     public long getFlightId() {
@@ -80,11 +80,11 @@ public class FlightDto {
         this.returnDate = returnDate;
     }
 
-    public int getSeats() {
+    public Integer getSeats() {
         return seats;
     }
 
-    public void setSeats(int seats) {
+    public void setSeats(Integer seats) {
         this.seats = seats;
     }
 }

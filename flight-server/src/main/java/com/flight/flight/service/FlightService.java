@@ -74,10 +74,10 @@ public class FlightService {
     public List<Airports> getAirports() throws IOException {
         List<Airports> airports = new ArrayList<>();
         Airports bom = new Airports(0, Locations.BOM);
-        Airports cal = new Airports(0, Locations.CAL);
-        Airports del = new Airports(0, Locations.DEL);
-        Airports cvg = new Airports(0, Locations.CVG);
-        Airports hyd = new Airports(0, Locations.HYD);
+        Airports cal = new Airports(1, Locations.CAL);
+        Airports del = new Airports(2, Locations.DEL);
+        Airports cvg = new Airports(3, Locations.CVG);
+        Airports hyd = new Airports(4, Locations.HYD);
 
         airports.add(bom);
         airports.add(cal);

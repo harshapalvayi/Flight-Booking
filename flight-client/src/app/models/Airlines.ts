@@ -10,11 +10,11 @@ export enum Airlines {
 }
 
 export enum Airports {
-  BOM = 'Mumbai Airport',
-  CVG = 'Cincinnati Airport',
-  HYD = 'Hyderabad Airport',
-  DEL = 'Delhi Airport',
-  CAL = 'California Airport'
+  BOM,
+  CVG,
+  HYD,
+  DEL,
+  CAL
 }
 
 export const AirportList = [

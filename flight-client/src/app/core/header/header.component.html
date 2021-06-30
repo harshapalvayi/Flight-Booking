@@ -8,11 +8,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn &&  user.accountType.valueOf() === 0">
-        <li class="nav-item"><a routerLink="/app-search-flight" class="nav-link" routerLinkActive="active">Search Flight</a></li>
+        <li class="nav-item"><a routerLink="/app-search-airlines" class="nav-link" routerLinkActive="active">Search Airlines</a></li>
       </ul>
 
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn &&  user.accountType.valueOf()  === 1">
-        <li class="nav-item"><a routerLink="/app-search-flight" class="nav-link" routerLinkActive="active">Search Flight</a></li>
+        <li class="nav-item"><a routerLink="/app-search-airlines" class="nav-link" routerLinkActive="active">Search Airlines</a></li>
+        <li class="nav-item"><a routerLink="/app-add-airlines" class="nav-link" routerLinkActive="active">Add Airlines</a></li>
         <li class="nav-item"><a routerLink="/app-manage-airlines" class="nav-link" routerLinkActive="active">Manage Airlines</a></li>
       </ul>
 

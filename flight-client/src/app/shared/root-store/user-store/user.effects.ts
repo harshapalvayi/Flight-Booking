@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
 import * as fromUserActions from '@store/user-store/user.action';
-import {NotificationService} from '@shared/services/notification/notification.service';
 import {SessionService} from '@shared/services/session/session.service';
+import {NotificationService} from '@shared/services/notification/notification.service';
 import {AuthenticationService} from '@shared/services/authentication/authentication.service';
 
 const handleAuthenticationForLogin = (

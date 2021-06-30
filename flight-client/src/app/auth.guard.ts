@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
       const role = this.user.accountType;
       switch (role) {
         case AccountType.USER:
-          if (state.url === '/app-search-flight' || state.url === '/app-home') {
+          if (state.url === '/app-search-airlines' || state.url === '/app-home') {
             return true;
           } else {
             this.router.navigate(['/']).then();
@@ -30,7 +30,10 @@ export class AuthGuard implements CanActivate {
           }
           break;
         case AccountType.ADMIN:
-          if (state.url === '/app-manage-airlines' || state.url === '/app-home' || state.url === '/app-search-flight') {
+          if (state.url === '/app-manage-airlines' ||
+              state.url === '/app-add-airlines' ||
+              state.url === '/app-home' ||
+              state.url === '/app-search-airlines') {
             return true;
           } else {
             this.router.navigate(['/']).then();
