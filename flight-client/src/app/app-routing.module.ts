@@ -26,8 +26,13 @@ const routes: Routes = [
     component: SignOutComponent
   },
   {
-    path: 'app-search-flight',
-    loadChildren: () => import('@features/search-flight/search-flight.module').then(m => m.SearchFlightModule),
+    path: 'app-search-airlines',
+    loadChildren: () => import('@features/search-airlines/search-airlines.module').then(m => m.SearchAirlinesModule),
+    canActivate: [RoleGuardService, AuthGuard]
+  },
+  {
+    path: 'app-add-airlines',
+    loadChildren: () => import('@features/add-airlines/add-airlines.module').then(m => m.AddAirlinesModule),
     canActivate: [RoleGuardService, AuthGuard]
   },
   {

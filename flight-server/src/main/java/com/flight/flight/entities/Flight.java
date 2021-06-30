@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -29,8 +28,7 @@ public class Flight {
 
     private Date returnDate;
 
-    @Size(min = 2, max = 100, message = "Minimum 2 seats, Maximum 100 seats")
-    private int seats;
+    private Integer seats;
 
     public long getFlightId() {
         return flightId;
@@ -72,11 +70,11 @@ public class Flight {
         this.toLocation = toLocation;
     }
 
-    public int getSeats() {
+    public Integer getSeats() {
         return seats;
     }
 
-    public void setSeats(int seats) {
+    public void setSeats(Integer seats) {
         this.seats = seats;
     }
 

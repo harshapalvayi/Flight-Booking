@@ -1,16 +1,19 @@
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import {Flights} from '@models/Flights';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { switchMap, catchError, map, tap } from 'rxjs/operators';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import * as fromFlightsActions from '@store/flight-store/flight.action';
 import {FlightService} from '@shared/services/flight/flight.service';
 
-const handleLoadFlights = (flightList) => {
-  return new fromFlightsActions.LoadFlightsSuccess({ ...flightList});
+const handleLoadFlights = (flightList: Flights[]) => {
+  return new fromFlightsActions.LoadFlightsSuccess({
+      flights: flightList,
+      isLoading: false
+  });
 };
-
 
 const handleLoadFlightsError = (errorRes: any) => {
   let errorMessage = 'An unknown error occurred!';
@@ -38,7 +41,6 @@ export class FlightEffects {
       return this.flightService.searchFlights(flights.payload)
         .pipe(
           map(resData => {
-              console.log('flight list', resData);
             return handleLoadFlights(resData);
           }),
           catchError(errorRes => {

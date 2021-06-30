@@ -61,6 +61,7 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<?> registerUser(@RequestBody Signup user) {
+        int userType;
         if (this.userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -72,7 +73,11 @@ public class UserController {
                     .body(new MessageResponse("EMAIL_EXISTS"));
         }
 
-        int userType = 0;
+        if ("admin".equals(user.getUsername())) {
+            userType = 1;  // for admin user
+        } else {
+            userType = 0; // for other users
+        }
         Users newUser = new Users(user.getUsername(), user.getPassword(), user.getEmail(), userType);
         this.userService.save(newUser);
         final String jwt = this.jwtTokenUtil.generateToken(newUser);
