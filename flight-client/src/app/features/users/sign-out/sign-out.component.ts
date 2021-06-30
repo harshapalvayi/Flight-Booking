@@ -1,6 +1,8 @@
 import {Router} from '@angular/router';
+import * as fromApp from '@store/app.reducer';
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '@shared/services/user/user.service';
+import * as fromUserActions from '@store/user-store/user.action';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-sign-out',
@@ -9,12 +11,11 @@ import {UserService} from '@shared/services/user/user.service';
 })
 export class SignOutComponent implements OnInit {
 
-  constructor(private router: Router,
-              private userService: UserService) { }
+  constructor(public router: Router,
+              public store: Store<fromApp.AppState>) { }
 
-  ngOnInit(): void {
-    this.userService.signOut();
-    this.router.navigate(['/app-sign-in']).then();
+  ngOnInit() {
+    this.store.dispatch(new fromUserActions.Logout());
   }
 
 }

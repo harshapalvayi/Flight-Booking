@@ -1,8 +1,7 @@
 package com.flight.flight.dto;
 
-import com.flight.flight.models.Airlines;
-import com.flight.flight.models.FromLocation;
-import com.flight.flight.models.ToLocation;
+import com.flight.flight.models.AirlineTypes;
+import com.flight.flight.models.Locations;
 
 import java.sql.Date;
 
@@ -12,15 +11,18 @@ public class FlightDto {
 
     private String airlineId;
 
-    private Airlines airlineName;
+    private AirlineTypes airlineName;
 
-    private FromLocation fromLocation;
+    private Locations fromLocation;
 
-    private ToLocation toLocation;
+    private Locations toLocation;
 
-    private Date deptTime;
+    private Date deptDate;
 
-    private Date arvlTime;
+    private Date returnDate;
+
+    private int seats;
+
 
     public long getFlightId() {
         return flightId;
@@ -38,43 +40,51 @@ public class FlightDto {
         this.airlineId = airlineId;
     }
 
-    public Airlines getAirlineName() {
+    public AirlineTypes getAirlineName() {
         return airlineName;
     }
 
-    public void setAirlineName(Airlines airlineName) {
+    public void setAirlineName(AirlineTypes airlineName) {
         this.airlineName = airlineName;
     }
 
-    public FromLocation getFromLocation() {
+    public Locations getFromLocation() {
         return fromLocation;
     }
 
-    public void setFromLocation(FromLocation fromLocation) {
+    public void setFromLocation(Locations fromLocation) {
         this.fromLocation = fromLocation;
     }
 
-    public ToLocation getToLocation() {
+    public Locations getToLocation() {
         return toLocation;
     }
 
-    public void setToLocation(ToLocation toLocation) {
+    public void setToLocation(Locations toLocation) {
         this.toLocation = toLocation;
     }
 
-    public Date getDeptTime() {
-        return deptTime;
+    public Date getDeptDate() {
+        return deptDate;
     }
 
-    public void setDeptTime(Date deptTime) {
-        this.deptTime = deptTime;
+    public void setDeptDate(Date deptDate) {
+        this.deptDate = deptDate;
     }
 
-    public Date getArvlTime() {
-        return arvlTime;
+    public Date getReturnDate() {
+        return returnDate;
     }
 
-    public void setArvlTime(Date arvlTime) {
-        this.arvlTime = arvlTime;
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 }

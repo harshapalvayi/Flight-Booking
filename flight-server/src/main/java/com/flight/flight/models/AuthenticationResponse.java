@@ -7,9 +7,8 @@ public class AuthenticationResponse implements Serializable {
 
     private final String jwtToken;
     private long  id;
+    private int  accountType;
     private String type = "Bearer";
-    private String firstname;
-    private String lastname;
     private String username;
     private String email;
     private Date expire;
@@ -19,35 +18,17 @@ public class AuthenticationResponse implements Serializable {
     }
 
     public AuthenticationResponse(long id,
-                                  String userName,
-                                  String firstName,
-                                  String lastName,
+                                  int accountType,
+                                  String username,
                                   String email,
                                   String jwtToken,
                                   Date expire) {
         this.id = id;
-        this.username = userName;
-        this.firstname = firstName;
-        this.lastname = lastName;
+        this.accountType = accountType;
+        this.username = username;
         this.jwtToken = jwtToken;
         this.email = email;
         this.expire = expire;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getUsername() {
@@ -86,27 +67,19 @@ public class AuthenticationResponse implements Serializable {
         this.type = type;
     }
 
-    public String getFirstName() {
-        return firstname;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstname = firstName;
-    }
-
-    public String getLastName() {
-        return lastname;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastname = lastName;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(int accountType) {
+        this.accountType = accountType;
     }
 }

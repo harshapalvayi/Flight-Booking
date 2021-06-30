@@ -6,6 +6,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 
 @Injectable()
 export class ErrorInterceptors implements HttpInterceptor {
+
   constructor(private userService: UserService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

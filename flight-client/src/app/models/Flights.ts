@@ -6,12 +6,18 @@ export class Flights {
   public airlineName?: Airlines;
   public fromLocation: Airports;
   public toLocation: Airports;
-  public deptTime: Date;
-  public arvlTime: Date;
+  public deptDate: Date;
+  public returnDate: Date;
   public duration?: number;
   public seats?: number;
 }
 
+export class SearchFlights {
+  public fromLocation: Airports;
+  public toLocation: Airports;
+  public deptDate: Date;
+  public returnDate: Date;
+}
 
 export class FlightDetails {
   public flightId: number;

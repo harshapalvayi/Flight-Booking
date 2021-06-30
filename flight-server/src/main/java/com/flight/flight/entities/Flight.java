@@ -1,13 +1,13 @@
 package com.flight.flight.entities;
 
-import com.flight.flight.models.Airlines;
-import com.flight.flight.models.FromLocation;
-import com.flight.flight.models.ToLocation;
+import com.flight.flight.models.AirlineTypes;
+import com.flight.flight.models.Locations;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -19,15 +19,18 @@ public class Flight {
 
     private String airlineId;
 
-    private Airlines airlineName;
+    private AirlineTypes airlineName;
 
-    private FromLocation fromLocation;
+    private Locations fromLocation;
 
-    private ToLocation   toLocation;
+    private Locations toLocation;
 
-    private Date deptTime;
+    private Date deptDate;
 
-    private Date arvlTime;
+    private Date returnDate;
+
+    @Size(min = 2, max = 100, message = "Minimum 2 seats, Maximum 100 seats")
+    private int seats;
 
     public long getFlightId() {
         return flightId;
@@ -45,43 +48,51 @@ public class Flight {
         this.airlineId = airlineId;
     }
 
-    public Airlines getAirlineName() {
+    public AirlineTypes getAirlineName() {
         return airlineName;
     }
 
-    public void setAirlineName(Airlines airlineName) {
+    public void setAirlineName(AirlineTypes airlineName) {
         this.airlineName = airlineName;
     }
 
-    public FromLocation getFromLocation() {
+    public Locations getFromLocation() {
         return fromLocation;
     }
 
-    public void setFromLocation(FromLocation fromLocation) {
+    public void setFromLocation(Locations fromLocation) {
         this.fromLocation = fromLocation;
     }
 
-    public ToLocation getToLocation() {
+    public Locations getToLocation() {
         return toLocation;
     }
 
-    public void setToLocation(ToLocation toLocation) {
+    public void setToLocation(Locations toLocation) {
         this.toLocation = toLocation;
     }
 
-    public Date getDeptTime() {
-        return deptTime;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setDeptTime(Date deptTime) {
-        this.deptTime = deptTime;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 
-    public Date getArvlTime() {
-        return arvlTime;
+    public Date getDeptDate() {
+        return deptDate;
     }
 
-    public void setArvlTime(Date arvlTime) {
-        this.arvlTime = arvlTime;
+    public void setDeptDate(Date deptDate) {
+        this.deptDate = deptDate;
+    }
+
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
     }
 }

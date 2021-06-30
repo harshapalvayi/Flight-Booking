@@ -4,6 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
@@ -17,42 +19,35 @@ public class Users  implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true, nullable = false)
-    private String firstname;
-
-    @Column(unique = true, nullable = false)
-    private String lastname;
-
     @Size(min = 4, message = "Minimum password length: 4 characters")
     private String password;
 
     @Column(unique = true, nullable = false)
     private String email;
 
-    private Integer accountType;
+    private int accountType;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstname;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstname = firstName;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    public String getLastName() {
-        return lastname;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastname = lastName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -67,34 +62,16 @@ public class Users  implements UserDetails {
         this.email = email;
     }
 
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
-
-    public Integer getAccountType() {
+    public int getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(Integer accountType) {
-        this.accountType = this.accountType;
+    public void setAccountType(int accountType) {
+        this.accountType = accountType;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
         return null;
     }
 
@@ -118,30 +95,15 @@ public class Users  implements UserDetails {
         return false;
     }
 
-    public Users(String userName,
-                 String firstName,
-                 String lastName,
-                 @Size(min = 4, message = "Minimum password length: 4 characters") String password,
-                 String email) {
-        this.username = userName;
-        this.firstname = firstName;
-        this.lastname = lastName;
-        this.password = password;
+    public Users(@NotBlank @Size(min = 4, max = 20) String username,
+                 @NotBlank @Size(min = 4, max = 40) String password,
+                 @NotBlank @Size(max = 50)
+                 @Email String email,
+                 int accountType) {
+        this.username = username;
         this.email = email;
-    }
-
-    public Users(String userName,
-                 String firstName,
-                 String lastName,
-                 @Size(min = 4, message = "Minimum password length: 4 characters") String password,
-                 int accountType,
-                 String email) {
-        this.username = userName;
-        this.firstname = firstName;
-        this.lastname = lastName;
         this.password = password;
         this.accountType = accountType;
-        this.email = email;
     }
 
     public Users() {

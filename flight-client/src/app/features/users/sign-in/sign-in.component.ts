@@ -1,44 +1,45 @@
-import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {UserService} from '@shared/services/user/user.service';
-import {SessionService} from '@shared/services/session/session.service';
+import {BehaviorSubject} from 'rxjs';
+import {Actions, ofType} from '@ngrx/effects';
+import * as fromApp from '@store/app.reducer';
+import * as fromUserActions from '@store/user-store/user.action';
+import {UserErrorsComponent} from '@shared/templates/user-errors/user-errors.component';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.sass']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
 
-  public errorMessage: any;
-  public signInForm: FormGroup = this.userService.createSignInForm();
+    @ViewChild(UserErrorsComponent, {static: false}) error: UserErrorsComponent;
+    errorMessage$: BehaviorSubject<string>;
+    public signInForm: FormGroup = this.userService.createSignInForm();
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private userService: UserService,
-              private elementRef: ElementRef,
-              private sessionService: SessionService) { }
 
-  ngOnInit(): void {}
-
-  onSubmit(): void {
-    if (this.signInForm.invalid) {
-      return;
+    constructor(private fb: FormBuilder,
+                private actions$: Actions,
+                private userService: UserService,
+                private store: Store<fromApp.AppState>) {
+        this.errorMessage$ = new BehaviorSubject<string>('');
+        actions$.pipe(ofType(fromUserActions.LOGIN_FAIL))
+            .subscribe( error => this.error.showDialog(error));
     }
 
-    this.sessionService.signIn(this.signInForm.value)
-      .subscribe(data => {
-           this.signInForm.reset();
-           this.router.navigate(['/app-home']).then();
-           this.errorMessage = null;
-        },
-          (error: { error: { message: string; }; }) => {
-          if (error instanceof HttpErrorResponse) {
-            this.errorMessage = error.error.message;
-          }
+    onSubmit() {
+        if (this.signInForm.invalid) {
+            return;
         }
-      );
-  }
+        const username = this.signInForm.value.username;
+        const password = this.signInForm.value.password;
+        this.store.dispatch(new fromUserActions.LoginStart(
+            {
+                username: username,
+                password: password
+            }));
+        this.signInForm.reset();
+    }
 }

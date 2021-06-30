@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookFlightComponent } from './book-flight.component';
+import { SearchFlightComponent } from './search-flight.component';
 
 describe('BookFlightComponent', () => {
-  let component: BookFlightComponent;
-  let fixture: ComponentFixture<BookFlightComponent>;
+  let component: SearchFlightComponent;
+  let fixture: ComponentFixture<SearchFlightComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookFlightComponent ]
-    })
-    .compileComponents();
+      declarations: [ SearchFlightComponent ]
+    });
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookFlightComponent);
+    fixture = TestBed.createComponent(SearchFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,7 @@
 package com.flight.flight.models;
 
-public enum FromLocation {
+public enum Locations {
+
     BOM("Mumbai Airport"),
     CVG("Cincinnati Airport"),
     HYD("Hyderabad Airport"),
@@ -9,7 +10,7 @@ public enum FromLocation {
 
     private final String name;
 
-    private FromLocation(final String name) {
+    private Locations(final String name) {
         this.name = name;
     }
 
